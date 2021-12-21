@@ -1,0 +1,38 @@
+.gray {
+    background-color: #f8f8f8;
+}
+.padding-right-large {
+    padding-right: 100px;
+  }
+  .padding-left-large {
+    padding-left: 100px;
+  }
+  .padding-top-small {
+    padding-top: 10px;
+  }
+  .padding-top-medium {
+    padding-top: 50px;
+  }
+  .form-width-xlarge {
+    width: 600px;
+  }
+  .overlay {
+   background-color: rgba(255, 255, 255, 0.4);
+   padding: 25px;
+   border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .border-card {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .border-bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .blur {
+    backdrop-filter: blur(3px);
+  }
+
+  input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    -webkit-appearance: none;
+}
