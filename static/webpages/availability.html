@@ -16,15 +16,16 @@
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/css/uikit.min.css" />
 
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
-
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="../css/main.css" />
 
-</head>
-<!-- Fin HTML head -->
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+
+    <!-- Notie -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+
+    <!-- End HTML head -->
 
 <body>
     <!-- Navbar -->
@@ -41,8 +42,8 @@
             <div class="uk-offcanvas-bar uk-flex uk-flex-column">
                 <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical ">
                     <li><a href="index.html">Inicio</a></li>
-                    <li><a href="#">Información</a></li>
-                    <li class="uk-active"><a href="#">Reservar</a></li>
+                    <li class="uk-active"><a href="#">Información</a></li>
+                    <li><a href="#">Reservar</a></li>
                     <li><a href="#">Contacto</a></li>
                 </ul>
             </div>
@@ -58,11 +59,11 @@
                 <div class="uk-navbar-right padding-right-large">
                     <ul class="uk-navbar-nav">
                         <li><a href="index.html">Inicio</a></li>
-                        <li>
+                        <li class="uk-active">
                             <a href="#">Información</a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li><a href="availability.html">Disponibilidad</a></li>                                   
+                                    <li><a href="availability.html">Disponibilidad</a></li>
                                     <li><a href="#">Habitaciones</a></li>
                                     <li><a href="#">Terraza</a></li>
                                     <li><a href="#">Balneario</a></li>
@@ -71,7 +72,7 @@
                             </div>
                         </li>
 
-                        <li class="uk-active"><a href="#">Reservar</a></li>
+                        <li><a href="#">Reservar</a></li>
                         <li><a href="#">Contacto</a></li>
 
                     </ul>
@@ -85,50 +86,222 @@
     <!-- Main -->
     <main class="uk-container uk-container-small uk-padding uk-padding-small">
 
-        <h1 class="uk-text-center uk-padding-small"><span>Buscar disponibilidad</span></h1> 
-            <form class="uk-grid-small" uk-grid>
+        <h1 class="uk-text-center uk-padding-small"><span>Buscar disponibilidad</span></h1>
+        <form class="uk-grid-small" id="date-picker" uk-grid>
 
 
-    
 
-                <div class="uk-width-1-2@s">
-                    <article class="uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: calendar"></span>
-                      <input class="uk-input uk-form-width-large date-input" id="" type="date"
-                        placeholder="Fecha de entrada" required />
-                    </article>
-                </div>
-                <div class="uk-width-1-2@s">
-                    <article class="uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: calendar"></span>
-                        <input class="uk-input uk-form-width-large date-input" id="" type="date"
-                        placeholder="Fecha de salida" required />
-                    </article>
-                </div>
-                <footer class=" uk-align-center uk-padding-small">
-                    <input type="submit" class="uk-button uk-button-primary" value="Buscar" />
-                    <input type="reset" class="uk-button uk-button-danger" value="Borrar" />
-                </footer>
-            </form>
- 
+            <div class="uk-width-1-2@s">
+                <article class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+                    <input class="uk-input uk-form-width-large date-input" type="input" placeholder="Fecha de entrada"
+                        required />
+                </article>
+            </div>
+            <div class="uk-width-1-2@s">
+                <article class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+                    <input class="uk-input uk-form-width-large date-input" type="input" placeholder="Fecha de salida"
+                        required />
+                </article>
+            </div>
+
+
+            <footer class=" uk-align-center uk-padding-small">
+                <input type="submit" class="uk-button uk-button-primary" value="Buscar" />
+                <input type="reset" class="uk-button uk-button-danger" value="Borrar" />
+            </footer>
+        </form>
+
     </main>
 
-    <input class="input100"  type="text" name="nacimientotitular" placeholder="Fecha de Nacimiento del Titular" onclick="ocultarError();" onfocus="(this.type='date')" onblur="(this.type='text')">
+    <button class="uk-button uk-button-primary" id="clickMeA">popup</button>
+    <button class="uk-button uk-button-primary" id="clickMeB">modal</button>
+    <button class="uk-button uk-button-primary" id="clickMeC">toast</button>
+    <button class="uk-button uk-button-primary" id="clickMeD">custom modal</button>
+
 
     <!-- End main-->
 
-    <!-- Pie de página -->
+    <!-- Footer -->
     <footer class="uk-footer uk-text-center ">
         <a href="https://getuikit.com/"><span class="uk-padding" uk-icon="icon: uikit"></span></a>
         <a href="#"><span class="uk-padding" uk-icon="icon: linkedin"></span></a>
         <p>Pedro Pérez</p>
         <p>UIKit y Go - 2021</p>
     </footer>
-    <!-- Fin pie de página -->
+    <!-- End footer -->
 
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/js/uikit-icons.min.js"></script>
+
+    <!-- Datepicker JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/locales/es.js"></script>
+
+    <!-- Notie JS -->
+    <script src="https://unpkg.com/notie"></script>
+
+    <!-- SweetAlert2-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+    <!-- Own scripts -->
+
+    <script>
+        let attention = prompt();
+
+
+        // datepicker
+        const elem = document.getElementById('date-picker');
+        const rangepicker = new DateRangePicker(elem, {
+            language: 'es',
+        });
+
+        // notie
+        function notify(msg, type) {
+            notie.alert({
+                text: msg,
+                type: type,
+            })
+        }
+
+        // trigger notie
+        document.getElementById('clickMeA').addEventListener('click', function () {
+            notify('hola', 'success');
+        });
+
+        // trigger sweetalert2
+        document.getElementById('clickMeB').addEventListener('click', function () {
+            //notifyModal('error!', 'ha habido algún error', 'error', 'vale!');
+
+
+            attention.modal({
+                // customized modal
+                icon: "warning",
+                text: "hello world",
+            });
+
+        });
+
+        document.getElementById('clickMeC').addEventListener('click', function () {
+
+            attention.toast({
+                msg: 'hola mundo',
+                type: 'success',
+            })
+        });
+            
+          
+
+        document.getElementById('clickMeD').addEventListener('click', function () {
+
+            let html = `
+           <form id="check-availability-form" action="" method="post">
+
+            <input type="text" name="check-availability-form-arrival" id="start" placeholder="Llegada" required>
+            <input type="text" name="check-availability-form-departure" id="end" placeholder="Salida" required>
+
+            </form>
+           
+           `
+           
+           attention.custom({
+               msg: html,
+           })
+
+        });
+
+ 
+        function notifyModal(title, text, icon, confirmButtonText) {
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon,
+                confirmButtonText: confirmButtonText,
+            })
+        }
+
+        // modules
+        function prompt() {
+            // toast
+            let toast = function (c) {
+                const {
+                    // default values
+                    icon = "success",
+                    msg = "",
+                    position = "top-end",
+                } = c;
+                const Toast = Swal.mixin({
+                    toast: true,
+                    title: msg,
+                    position: position,
+                    icon: icon,
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({})
+            }
+
+            // success modal
+            let modal = function (c) {
+                const {
+                    // default values
+                    icon = "success",
+                    title = "",
+                    text = "",
+                    footer = "",
+                } = c;
+                Swal.fire({
+                    icon: icon,
+                    title: title,
+                    text: text,
+                    footer: footer,
+                })
+            }
+
+            async function custom(c) {
+                const {
+                    // default values
+                    msg = "",
+                    title = "",
+                } = c;
+                const { value: formValues } = await Swal.fire({
+                    title: title,
+                    html: msg,
+                    backdrop: false,
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    preConfirm: () => {
+                        return [
+                            document.getElementById('start').value,
+                            document.getElementById('end').value
+                        ]
+                    }
+                })
+                if (formValues) {
+                    Swal.fire(JSON.stringify(formValues))
+                }
+            }
+
+
+            return {
+                toast: toast,
+                modal: modal,
+                custom: custom,
+            }
+
+        }
+    </script>
+
+
 </body>
 
 </html>
