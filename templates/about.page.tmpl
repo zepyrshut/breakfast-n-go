@@ -1,0 +1,29 @@
+{{template "base" .}}
+
+
+{{define "content"}}
+<div class="uk-section uk-section-default">
+    <div class="uk-container">
+        <h1>About</h1>
+        <p>
+            This is the about page.
+        </p>
+        <p>Otro párrafo.</p>
+        <p>Más párrafos.</p>
+
+        <p>Viene de la plantilla:
+            {{index .StringMap "test"}}
+        </p>
+
+        <p>
+            {{if ne (index .StringMap "remote_ip") ""}}
+            Tu dirección IP es: {{index .StringMap "remote_ip"}}
+            {{else}}
+            No sé tu dirección IP, ve a <a href="/">Inicio</a>
+            {{end}}
+        </p>
+
+    </div>
+</div>
+{{end}}
+
