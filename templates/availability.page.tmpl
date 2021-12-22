@@ -1,0 +1,74 @@
+{{template "base" .}}
+
+
+{{define "content"}}
+
+<main class="uk-container uk-container-small uk-padding uk-padding-small">
+
+    <h1 class="uk-text-center uk-padding-small"><span>Buscar disponibilidad</span></h1>
+
+    <form class="uk-grid-small" id="date-picker" uk-grid method="POST" action="/availability">
+
+        <div class="uk-width-1-2@s">
+            <article class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+                <input class="uk-input uk-form-width-large date-input" type="text" name="arrival" id="arrival"
+                    placeholder="Fecha de entrada" required />
+            </article>
+        </div>
+        <div class="uk-width-1-2@s">
+            <article class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+                <input class="uk-input uk-form-width-large date-input" type="text" name="departure" id="departure"
+                    placeholder="Fecha de salida" required />
+            </article>
+        </div>
+
+
+        <input type="text" name="csrf_token" value="{{.CSRFToken}}" hidden />
+
+        <footer class=" uk-align-center uk-padding-small">
+            <input type="submit" class="uk-button uk-button-primary" value="Buscar" />
+            <input type="reset" class="uk-button uk-button-danger" value="Borrar" />
+        </footer>
+    </form>
+
+</main>
+
+<!-- <button class="uk-button uk-button-primary" id="clickMeA">popup</button>
+<button class="uk-button uk-button-primary" id="clickMeB">modal</button>
+<button class="uk-button uk-button-primary" id="clickMeC">toast</button> -->
+
+
+{{end}}
+
+{{define "js"}}
+<script>
+    // datepicker
+    const elem = document.getElementById('date-picker');
+    const rangepicker = new DateRangePicker(elem, {
+        language: 'es',
+    });
+
+
+    // document.getElementById('clickMeA').addEventListener('click', function () {
+    //     notify('hola', 'success');
+    // });
+
+    // // trigger sweetalert2 with modules
+    // document.getElementById('clickMeB').addEventListener('click', function () {
+    //     attention.modal({
+    //         // customized modal
+    //         icon: "warning",
+    //         text: "hello world",
+    //     });
+
+    // });
+    // document.getElementById('clickMeC').addEventListener('click', function () {
+    //     attention.toast({
+    //         msg: 'hola mundo',
+    //         type: 'success',
+    //     })
+    // });
+</script>
+{{end}}

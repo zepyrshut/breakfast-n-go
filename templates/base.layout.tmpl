@@ -1,35 +1,228 @@
 {{define "base"}}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+<!-- HTML head -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Base layout</title>
+    <!-- Etiquetas meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/css/uikit.min.css" />
-
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+    <!-- Notie -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="/static/css/main.css" />
     {{block "css" .}}
-
     {{end}}
-
 </head>
+<!-- End HTML head -->
 
 <body>
+    <!-- Navbar -->
+    <!-- Smartphone and tablet -->
+    <div class="uk-hidden@m">
+        <div class="uk-navbar uk-navbar-container uk-margin border-bottom">
+            <div class="uk-navbar-left">
+                <a class="uk-navbar-toggle" uk-toggle="target: #menu-lateral">
+                    <span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">Menu</span>
+                </a>
+            </div>
+        </div>
+        <nav id="menu-lateral" uk-offcanvas="overlay: true" role="navigation">
+            <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+                <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical ">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/aboout">Información</a></li>
+                    <li><a href="/reservation">Reservar</a></li>
+                    <li><a href="/contact">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- Desktop -->
+    <div class="gray">
+        <div class="uk-visible@m uk-container">
+            <nav class="uk-navbar-container border-bottom" uk-navbar role="navigation">
+                <div class="uk-navbar-left padding-left-large">
+                    <a href="/" class="uk-navbar-item uk-logo">BNG</a>
+                </div>
+                <div class="uk-navbar-right padding-right-large">
+                    <ul class="uk-navbar-nav">
+                        <li><a href="/">Inicio</a></li>
+                        <li>
+                            <a href="/about">Información</a>
+                            <div class="uk-navbar-dropdown">
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    <li><a href="/availability">Disponibilidad</a></li>
+                                    <li><a href="/rooms">Habitaciones</a></li>
+                                    <li><a href="/terrace">Terraza</a></li>
+                                    <li><a href="/spa">Balneario</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="/reservation">Reservar</a></li>
+                        <li><a href="/contact">Contacto</a></li>
+                    </ul>
 
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- End navbar -->
+    <!-- Main -->
     {{block "content" .}}
-
-
     {{end}}
-
+    <!-- End main-->
+    <!-- Footer -->
+    <footer class="uk-footer uk-text-center ">
+        <a href="https://getuikit.com/"><span class="uk-padding" uk-icon="icon: uikit"></span></a>
+        <a href="#"><span class="uk-padding" uk-icon="icon: linkedin"></span></a>
+        <p>Pedro Pérez</p>
+        <p>UIKit y Go - 2021</p>
+    </footer>
+    <!-- End footer -->
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/js/uikit-icons.min.js"></script>
-
+    <!-- Datepicker JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/locales/es.js"></script>
+    <!-- Notie JS -->
+    <script src="https://unpkg.com/notie"></script>
+    <!-- SweetAlert2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{block "js" .}}
 
     {{end}}
+
+
+    <!-- JS personalizado -->
+    <script>
+        let attention = prompt();
+
+        // notie
+        function notify(msg, type) {
+            notie.alert({
+                text: msg,
+                type: type,
+            })
+        }
+        // notie modal
+        function notifyModal(title, text, icon, confirmButtonText) {
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon,
+                confirmButtonText: confirmButtonText,
+            })
+        }
+        // modules
+        function prompt() {
+            // toast
+            let toast = function (c) {
+                const {
+                    // default values
+                    icon = "success",
+                    msg = "",
+                    position = "top-end",
+                } = c;
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    title: msg,
+                    position: position,
+                    icon: icon,
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({})
+            }
+            // success modal
+            let modal = function (c) {
+                const {
+                    // default values
+                    icon = "success",
+                    title = "",
+                    text = "",
+                    footer = "",
+                } = c;
+                Swal.fire({
+                    icon: icon,
+                    title: title,
+                    text: text,
+                    footer: footer,
+                })
+            }
+            // custom
+            async function custom(c) {
+                const {
+                    msg = "",
+                    title = "",
+                } = c;
+
+                const { value: result } = await Swal.fire({
+                    title: title,
+                    html: msg,
+                    backdrop: false,
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    willOpen: () => {
+                        const elem = document.getElementById("reservation-dates-modal");
+                        const rp = new DateRangePicker(elem, {
+                            language: 'es',
+                        })
+                    },
+                    didOpen: () => {
+                        document.getElementById("arrival").removeAttribute("disabled");
+                        document.getElementById("departure").removeAttribute("disabled");
+                    },
+                    preConfirm: () => {
+                        return [
+                            document.getElementById('arrival').value,
+                            document.getElementById('departure').value
+                        ]
+                    }
+                })
+
+                if (result) {
+                    if(result.dismiss !== Swal.DismissReason.cancel) {
+                        if (result.value !== "") {
+                            if (c.callback !== undefined) {
+                                c.callback(result);
+                            }
+                        } else {
+                            c.callback(false);
+                        }
+                    } else {
+                        c.callback(false);
+                    }
+                    
+                }
+
+
+
+
+            }
+            return {
+                toast: toast,
+                modal: modal,
+                custom: custom,
+            }
+        }
+
+    </script>
 </body>
 
 </html>

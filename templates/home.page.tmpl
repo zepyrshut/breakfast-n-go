@@ -2,12 +2,61 @@
 
 
 {{define "content"}}
-<div class="uk-section uk-section-default">
-    <div class="uk-container">
-        <h1>Home</h1>
-        <p>
-            This is the home page.
-        </p>
+<p>Página de inicio</p>
+<a class="uk-button uk-button-primary" href="#">¡Reservar ahora!</a>
+
+
+
+
+
+
+<a href="#!" class="uk-button uk-button-primary" id="check-availability-button">Comprobar fechas</a>
+
+{{end}}
+
+
+{{define "js"}}
+<script>
+    document.getElementById('check-availability-button').addEventListener("click", function () {
+        let html = `
+<form id="check-availability-form" action="" method="post">
+    <div id="date-picker-b">
+        <div id="reservation-dates-modal">
+            <div>
+                <input class="uk-input uk-form-width-large date-input" type="text" name="arrival" id="arrival" placeholder="Fecha de salida" required />
+            </div>
+            <div>
+                <input class="uk-input uk-form-width-large date-input" type="text" name="departure" id="departure" placeholder="Fecha de llegada" required />
+            </div>
+        </div>
     </div>
-</div>
+</form>
+`;
+        attention.custom({
+            title: 'Choose your dates',
+            msg: html,
+            callback: function (result) {
+                console.log("called");
+
+                let form = document.getElementById('check-availability-form');
+                let formData = new FormData(form);
+
+                fetch('/availability-json')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        console.log(data.ok);
+                        console.log(data.msg);
+                    })
+            }
+        })
+    });
+
+    const elem = document.getElementById('date-picker-b');
+    const rangepicker = new DateRangePicker(elem, {
+        language: 'es',
+    });
+
+</script>
+
 {{end}}

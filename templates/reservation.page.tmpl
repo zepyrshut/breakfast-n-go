@@ -1,0 +1,53 @@
+{{template "base" .}}
+{{define "content"}}
+<main class="uk-container uk-container-small uk-padding uk-padding-small">
+
+    <h1 class="uk-text-center uk-padding-small"><span>Reservar alojamiento</span></h1>
+    <form class="uk-grid-small" uk-grid method="POST" action="">
+
+
+        <div class="uk-width-1-3@s">
+            <article class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                <input class="uk-input uk-form-width-large" id="" type="text" placeholder="Nombre" />
+            </article>
+        </div>
+
+
+        <div class="uk-width-1-3@s">
+            <article class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                <input class="uk-input uk-form-width-large" id="" type="text" placeholder="Primer apellido" />
+            </article>
+        </div>
+
+        <div class="uk-width-1-3@s">
+            <article class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                <input class="uk-input uk-form-width-large" id="" type="text" placeholder="Segundo apellido" />
+            </article>
+        </div>
+
+
+        <div class="uk-width-1-2@s">
+            <article class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                <input class="uk-input uk-form-width-large" id="" type="text" placeholder="Correo electrónico" />
+            </article>
+        </div>
+        <div class="uk-width-1-2@s">
+            <article class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon:  receiver"></span>
+                <input class="uk-input uk-form-width-large" id="" type="text" placeholder="Teléfono" />
+            </article>
+        </div>
+        <footer class=" uk-align-center uk-padding-small">
+            <input type="submit" class="uk-button uk-button-primary" value="Reservar" />
+            <input type="reset" class="uk-button uk-button-danger" value="Borrar" />
+        </footer>
+    </form>
+
+
+</main>
+
+{{end}}
