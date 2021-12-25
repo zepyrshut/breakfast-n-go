@@ -8,6 +8,7 @@ Hotel management.
 ## Back-end
 
 - [Go 1.17.5](https://go.dev/)
+
 ### Go Modules
 - [Chi router](github.com/alexedwards/scs/v2)
 - [SCS Session Management](github.com/go-chi/chi)
@@ -16,7 +17,7 @@ Hotel management.
 
 ## Front-end
 
-- Write in HTML5 + CSS
+- Written in HTML5 + CSS
 - [UIKit](https://getuikit.com)
 
 ### Vanilla JS components
