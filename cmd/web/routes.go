@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/zepyrshut/breakfast-n-go/pkg/config"
-	"github.com/zepyrshut/breakfast-n-go/pkg/handlers"
+	"github.com/zepyrshut/breakfast-n-go/internal/config"
+	"github.com/zepyrshut/breakfast-n-go/internal/handlers"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"

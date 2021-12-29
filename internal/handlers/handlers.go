@@ -5,9 +5,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/zepyrshut/breakfast-n-go/pkg/config"
-	"github.com/zepyrshut/breakfast-n-go/pkg/models"
-	"github.com/zepyrshut/breakfast-n-go/pkg/render"
+	"github.com/zepyrshut/breakfast-n-go/internal/config"
+	"github.com/zepyrshut/breakfast-n-go/internal/models"
+	"github.com/zepyrshut/breakfast-n-go/internal/render"
 )
 
 // TemplateData holds data sent from handlers to template

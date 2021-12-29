@@ -179,25 +179,25 @@
                     focusConfirm: false,
                     showCancelButton: true,
                     willOpen: () => {
-                        const elem = document.getElementById("reservation-dates-modal");
-                        const rp = new DateRangePicker(elem, {
-                            language: 'es',
-                        })
-                    },
-                    didOpen: () => {
-                        document.getElementById("arrival").removeAttribute("disabled");
-                        document.getElementById("departure").removeAttribute("disabled");
+                        if (c.willOpen !== undefined) {
+                            c.willOpen();
+                        }
                     },
                     preConfirm: () => {
                         return [
                             document.getElementById('arrival').value,
                             document.getElementById('departure').value
                         ]
-                    }
+                    },
+                    didOpen: () => {
+                        if (c.didOpen !== undefined) {
+                            c.didOpen();
+                        }
+                    },
                 })
 
                 if (result) {
-                    if(result.dismiss !== Swal.DismissReason.cancel) {
+                    if (result.dismiss !== Swal.DismissReason.cancel) {
                         if (result.value !== "") {
                             if (c.callback !== undefined) {
                                 c.callback(result);
@@ -208,7 +208,7 @@
                     } else {
                         c.callback(false);
                     }
-                    
+
                 }
 
 

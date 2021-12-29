@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 
 	"github.com/justinas/nosurf"
-	"github.com/zepyrshut/breakfast-n-go/pkg/config"
-	"github.com/zepyrshut/breakfast-n-go/pkg/models"
+	"github.com/zepyrshut/breakfast-n-go/internal/config"
+	"github.com/zepyrshut/breakfast-n-go/internal/models"
 )
 
 var functions = template.FuncMap{}

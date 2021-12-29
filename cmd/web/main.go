@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/zepyrshut/breakfast-n-go/pkg/config"
-	"github.com/zepyrshut/breakfast-n-go/pkg/handlers"
-	"github.com/zepyrshut/breakfast-n-go/pkg/render"
+	"github.com/zepyrshut/breakfast-n-go/internal/config"
+	"github.com/zepyrshut/breakfast-n-go/internal/handlers"
+	"github.com/zepyrshut/breakfast-n-go/internal/render"
 
 	"github.com/alexedwards/scs/v2"
 )

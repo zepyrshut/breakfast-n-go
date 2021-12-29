@@ -33,15 +33,32 @@
 </form>
 `;
         attention.custom({
-            title: 'Choose your dates',
+            title: 'Selecciona las fechas',
             msg: html,
+
+            willOpen: () => {
+                const elem = document.getElementById("reservation-dates-modal");
+                const rp = new DateRangePicker(elem, {
+                    language: 'es',
+                })
+            },
+
+            didOpen: () => {
+                document.getElementById("arrival").removeAttribute("disabled");
+                document.getElementById("departure").removeAttribute("disabled");
+            },
+
             callback: function (result) {
                 console.log("called");
 
                 let form = document.getElementById('check-availability-form');
                 let formData = new FormData(form);
+                formData.append('csrf_token', '{{.CSRFToken}}');
 
-                fetch('/availability-json')
+                fetch('/availability-json', {
+                    method: "POST",
+                    body: formData,
+                })
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
