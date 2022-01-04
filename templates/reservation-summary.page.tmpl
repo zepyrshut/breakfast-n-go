@@ -1,0 +1,48 @@
+{{template "base" .}}
+
+
+{{define "content"}}
+
+{{$res := index .Data "reservation"}}
+<div class="uk-section uk-section-default">
+    <div class="uk-container">
+        <h1>Resumen de la reserva</h1>
+
+
+        <table>
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <td>Nombre:</td>
+                    <td>{{$res.FirstName}} {{$res.SecondName}} {{$res.LastName}}</td>
+                </tr>
+                <tr>
+                    <td>Llegada:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Salida:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Correo electrónico:</td>
+                    <td>{{$res.Email}}</td>
+                </tr>
+                <tr>
+                    <td>Teléfono:</td>
+                    <td>{{$res.Phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        
+</div>
+
+
+
+
+
+{{end}}
+

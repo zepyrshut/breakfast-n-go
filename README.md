@@ -6,17 +6,16 @@ Hotel management.
 
 # Features of the project
 ## Back-end
-
 - [Go 1.17.5](https://go.dev/)
 
 ### Go Modules
 - [Chi router](github.com/alexedwards/scs/v2)
 - [SCS Session Management](github.com/go-chi/chi)
 - [No Surf](github.com/justinas/nosurf)
+- [Go Validator](github.com/asaskevich/govalidator)
 
 
 ## Front-end
-
 - Written in HTML5 + CSS
 - [UIKit](https://getuikit.com)
 

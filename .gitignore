@@ -1,1 +1,10 @@
-Golang.code-workspace
+*.code-workspace
+coverage.out
+.idea
+bookings
+run.sh
+.DS_Store
+database.yml
+dev-notes.md
+bookings.exe
+run.bat

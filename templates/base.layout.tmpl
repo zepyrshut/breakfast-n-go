@@ -107,6 +107,18 @@
     <script>
         let attention = prompt();
 
+        {{with .Error}}
+        notify("{{.}}", "error")
+        {{end}}
+
+        {{with .Flash}}
+        notify("{{.}}", "success")
+        {{end}}
+
+        {{with .Warning}}
+        notify("{{.}}", "warning")
+        {{end}}
+
         // notie
         function notify(msg, type) {
             notie.alert({
@@ -123,6 +135,7 @@
                 confirmButtonText: confirmButtonText,
             })
         }
+
         // modules
         function prompt() {
             // toast
