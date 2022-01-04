@@ -5,6 +5,7 @@ bookings
 run.sh
 .DS_Store
 database.yml
-dev-notes.md
+cheatsheet-dev.md
 bookings.exe
 run.bat
+static/webpages

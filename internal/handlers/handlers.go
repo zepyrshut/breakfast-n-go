@@ -3,6 +3,8 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/zepyrshut/breakfast-n-go/internal/config"
 	"github.com/zepyrshut/breakfast-n-go/internal/driver"
@@ -123,12 +125,35 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	ad := r.Form.Get("arrival_date")
+	dd := r.Form.Get("departure_date")
+
+	// 2022-01-01 -- 01/02 03:04:05PM '06 -0700
+
+	layout := "2006-01-02"
+	arrivalDate, err := time.Parse(layout, ad)
+	if err != nil {
+		helpers.ServerError(w, err)
+	}
+	departureDate, err := time.Parse(layout, dd)
+	if err != nil {
+		helpers.ServerError(w, err)
+	}
+
+	roomID, err := strconv.Atoi(r.Form.Get("room_id"))
+	if err != nil {
+		helpers.ServerError(w, err)
+	}
+
 	reservation := models.Reservation{
-		FirstName:  r.Form.Get("first_name"),
-		SecondName: r.Form.Get("second_name"),
-		LastName:   r.Form.Get("last_name"),
-		Email:      r.Form.Get("email"),
-		Phone:      r.Form.Get("phone"),
+		FirstName:     r.Form.Get("first_name"),
+		SecondName:    r.Form.Get("second_name"),
+		LastName:      r.Form.Get("last_name"),
+		Email:         r.Form.Get("email"),
+		Phone:         r.Form.Get("phone"),
+		ArrivalDate:   arrivalDate,
+		DepartureDate: departureDate,
+		RoomID:        roomID,
 	}
 
 	form := forms.New(r.PostForm)
@@ -149,6 +174,11 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 			Data: data,
 		})
 		return
+	}
+
+	err = m.DB.InsertReservation(reservation)
+	if err != nil {
+		helpers.ServerError(w, err)
 	}
 
 	m.App.Session.Put(r.Context(), "reservation", reservation)
