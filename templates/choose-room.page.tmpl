@@ -1,0 +1,34 @@
+{{template "base" .}}
+
+
+{{define "content"}}
+<div class="uk-section uk-section-default">
+    <div class="uk-container">
+        <h1>Elija una habitación</h1>
+
+
+
+
+
+
+
+        {{$rooms := index .Data "rooms"}}
+
+        {{range $rooms}}
+        {{.RoomName}}
+        {{end}}
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+{{end}}
+

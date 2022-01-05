@@ -59,10 +59,47 @@ func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
 // Post Availability is the post availability page handler
 func (m *Repository) DoPostAvailability(w http.ResponseWriter, r *http.Request) {
 
-	arrival := r.Form.Get("arrival")
-	departure := r.Form.Get("departure")
+	ad := r.Form.Get("arrival_date")
+	dd := r.Form.Get("departure_date")
 
-	w.Write([]byte("arrival is" + arrival + " and departure is " + departure))
+	layout := "02/01/2006"
+	arrivalDate, err := time.Parse(layout, ad)
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+	departureDate, err := time.Parse(layout, dd)
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+
+	rooms, err := m.DB.SearchAvailabilityForAllRooms(arrivalDate, departureDate)
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+
+	if len(rooms) == 0 {
+		m.App.Session.Put(r.Context(), "error", "No hay habitaciones disponibles")
+		http.Redirect(w, r, "/availability", http.StatusSeeOther)
+	}
+
+	data := make(map[string]interface{})
+	data["rooms"] = rooms
+
+	res := models.Reservation{
+		ArrivalDate:   arrivalDate,
+		DepartureDate: departureDate,
+	}
+
+	m.App.Session.Put(r.Context(), "reservation", res)
+
+	render.Template(w, r, "choose-room.page.tmpl", &models.TemplateData{
+		Data: data,
+	})
+
+	w.Write([]byte("arrival is " + ad + " and departure is " + dd))
 }
 
 type jsonResponse struct {
@@ -130,19 +167,23 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 
 	// 2022-01-01 -- 01/02 03:04:05PM '06 -0700
 
-	layout := "2006-01-02"
+	layout := "02/01/2006"
+	// TODO: beware for date format in form
 	arrivalDate, err := time.Parse(layout, ad)
 	if err != nil {
 		helpers.ServerError(w, err)
+		return
 	}
 	departureDate, err := time.Parse(layout, dd)
 	if err != nil {
 		helpers.ServerError(w, err)
+		return
 	}
 
 	roomID, err := strconv.Atoi(r.Form.Get("room_id"))
 	if err != nil {
 		helpers.ServerError(w, err)
+		return
 	}
 
 	reservation := models.Reservation{
@@ -176,9 +217,24 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = m.DB.InsertReservation(reservation)
+	newReservationID, err := m.DB.InsertReservation(reservation)
 	if err != nil {
 		helpers.ServerError(w, err)
+		return
+	}
+
+	restriction := models.RoomRestriction{
+		ArrivalDate:   arrivalDate,
+		DepartureDate: departureDate,
+		RoomID:        roomID,
+		ReservationID: newReservationID,
+		RestrictionID: 1,
+	}
+
+	err = m.DB.InsertRoomRestriction(restriction)
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
 	}
 
 	m.App.Session.Put(r.Context(), "reservation", reservation)
