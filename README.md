@@ -9,11 +9,10 @@ Hotel management.
 - [Go 1.17.5](https://go.dev/)
 
 ### Go Modules
-- [Chi router](github.com/alexedwards/scs/v2)
-- [SCS Session Management](github.com/go-chi/chi)
-- [No Surf](github.com/justinas/nosurf)
-- [Go Validator](github.com/asaskevich/govalidator)
-
+- [Chi router](https://github.com/go-chi/chi)
+- [SCS Session Management](https://github.com/alexedwards/scs/v2)
+- [No Surf](https://github.com/justinas/nosurf)
+- [Go Validator](https://github.com/asaskevich/govalidator)
 
 ## Front-end
 - Written in HTML5 + CSS
